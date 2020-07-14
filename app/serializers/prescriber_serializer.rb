@@ -1,3 +1,3 @@
 class PrescriberSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :firstname, :lastname, :tel, :email
 end
