@@ -1,3 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      post '/cbos/login', to: 'cbos#login'
+      get '/cbos/persist_login', to: 'cbos#persist_login'
+
+      post '/prescribers', to: 'prescribers#create'
+      patch '/prescribers/:id', to: 'prescribers#update'
+      delete '/prescribers/:id', to: 'prescribers#destroy'
+
+      post '/hcs/login', to: 'hcs#login'
+      get '/hcs/persist_login', to: 'hcs#persist_login'
+
+      post '/rxs', to: 'rxs#create'
+      patch '/rxs/:id', to: 'rxs#update'
+    end
+  end
 end
