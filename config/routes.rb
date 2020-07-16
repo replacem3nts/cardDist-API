@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get '/cbos', to: 'cbos#index'
       post '/cbos/login', to: 'cbos#login'
       get '/cbos/persist_login', to: 'cbos#persist_login'
 
