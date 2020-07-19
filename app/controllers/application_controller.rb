@@ -22,7 +22,6 @@ class ApplicationController < ActionController::API
         if decoded_token
             user_id = decoded_token[0].values[0].to_s
             user_type = decoded_token[0].keys[0].to_s
-            byebug
             case user_type
             when 'cbo_id'
                 @cbo = Cbo.find_by(id: user_id)
