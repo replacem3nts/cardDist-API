@@ -4,7 +4,7 @@ class Cbo < ApplicationRecord
     has_many :rxs
     validates :username, uniqueness: {case_sensitive: false}
 
-    def all_hcs
-        Hc.all
+    def allhcs
+        Hc.all.map{| hc | HcSerializer.new(hc)}
     end
 end
