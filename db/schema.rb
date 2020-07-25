@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_000649) do
+ActiveRecord::Schema.define(version: 2020_07_25_200855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,39 @@ ActiveRecord::Schema.define(version: 2020_07_14_000649) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "covidimpacts", force: :cascade do |t|
+    t.string "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "doctorvisits", force: :cascade do |t|
+    t.string "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "funduses", force: :cascade do |t|
+    t.string "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "hcs", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hhmembers", force: :cascade do |t|
+    t.integer "age"
+    t.string "gender"
+    t.bigint "survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["survey_id"], name: "index_hhmembers_on_survey_id"
   end
 
   create_table "prescribers", force: :cascade do |t|
@@ -56,11 +83,60 @@ ActiveRecord::Schema.define(version: 2020_07_14_000649) do
     t.boolean "loaded"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "prescriberemail"
     t.index ["cbo_id"], name: "index_rxes_on_cbo_id"
     t.index ["hc_id"], name: "index_rxes_on_hc_id"
   end
 
+  create_table "scs", force: :cascade do |t|
+    t.bigint "survey_id", null: false
+    t.bigint "covidimpact_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["covidimpact_id"], name: "index_scs_on_covidimpact_id"
+    t.index ["survey_id"], name: "index_scs_on_survey_id"
+  end
+
+  create_table "sds", force: :cascade do |t|
+    t.bigint "doctorvisit_id", null: false
+    t.bigint "survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctorvisit_id"], name: "index_sds_on_doctorvisit_id"
+    t.index ["survey_id"], name: "index_sds_on_survey_id"
+  end
+
+  create_table "sfs", force: :cascade do |t|
+    t.bigint "funduse_id", null: false
+    t.bigint "survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["funduse_id"], name: "index_sfs_on_funduse_id"
+    t.index ["survey_id"], name: "index_sfs_on_survey_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.bigint "rx_id", null: false
+    t.integer "age"
+    t.string "gender"
+    t.integer "hhsize"
+    t.integer "hhfamilies"
+    t.string "zipcode"
+    t.string "mixedstatus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rx_id"], name: "index_surveys_on_rx_id"
+  end
+
+  add_foreign_key "hhmembers", "surveys"
   add_foreign_key "prescribers", "cbos"
   add_foreign_key "rxes", "cbos"
   add_foreign_key "rxes", "hcs"
+  add_foreign_key "scs", "covidimpacts"
+  add_foreign_key "scs", "surveys"
+  add_foreign_key "sds", "doctorvisits"
+  add_foreign_key "sds", "surveys"
+  add_foreign_key "sfs", "funduses"
+  add_foreign_key "sfs", "surveys"
+  add_foreign_key "surveys", "rxes"
 end
