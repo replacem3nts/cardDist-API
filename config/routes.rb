@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :surveys
   namespace :api do
     namespace :v1 do
       get '/cbos', to: 'cbos#index'
+      get '/cbos/constants', to: 'cbos#get_constants'
       post '/cbos/login', to: 'cbos#login'
       get '/cbos/persist_login', to: 'cbos#persist_login'
 
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
       post '/rxs', to: 'rxs#create'
       patch '/rxs/:id', to: 'rxs#update'
+
+      post '/surveys', to: 'surveys#create'
     end
   end
 end

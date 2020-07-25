@@ -6,6 +6,13 @@ class Api::V1::CbosController < ApplicationController
         render json: @cbos
     end
 
+    def get_constants
+        @covidimpacts = Covidimpact.all
+        @doctorvisits = Doctorvisit.all
+        @funduses = Funduse.all
+        render json: {covidimpacts: @covidimpacts, doctorvisits: @doctorvisits, funduses: @funduses}
+    end
+
     def login
         @cbo = Cbo.find_by(username: params[:username])
         if @cbo && @cbo.authenticate(params[:password])
