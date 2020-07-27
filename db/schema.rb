@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_200855) do
+ActiveRecord::Schema.define(version: 2020_07_26_193025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_200855) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "prescriberemail"
+    t.text "notes"
     t.index ["cbo_id"], name: "index_rxes_on_cbo_id"
     t.index ["hc_id"], name: "index_rxes_on_hc_id"
   end
