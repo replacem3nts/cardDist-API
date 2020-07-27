@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get '/hcs/persist_login', to: 'hcs#persist_login'
 
       post '/rxs', to: 'rxs#create'
-      patch '/rxs/:id', to: 'rxs#update'
+      patch '/rxs/cbos', to: 'rxs#cbo_update'
 
       post '/surveys', to: 'surveys#create'
     end

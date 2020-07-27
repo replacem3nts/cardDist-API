@@ -1,7 +1,7 @@
 class Cbo < ApplicationRecord
     has_secure_password
     has_many :prescribers
-    has_many :rxs
+    has_many :rxes
     validates :username, uniqueness: {case_sensitive: false}
 
     def allhcs
