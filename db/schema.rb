@@ -71,16 +71,16 @@ ActiveRecord::Schema.define(version: 2020_07_26_193025) do
 
   create_table "rxes", force: :cascade do |t|
     t.bigint "cbo_id", null: false
-    t.bigint "hc_id", null: false
+    t.bigint "hc_id", default: 1, null: false
     t.string "clienttel"
-    t.integer "amount"
+    t.integer "amount", default: 300
     t.string "language"
     t.string "prescribername"
     t.string "prescriberphone"
     t.datetime "appt"
     t.string "cardserial"
-    t.boolean "pickedup"
-    t.boolean "loaded"
+    t.boolean "pickedup", default: false
+    t.boolean "loaded", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "prescriberemail"

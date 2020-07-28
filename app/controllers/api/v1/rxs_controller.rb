@@ -10,22 +10,26 @@ class Api::V1::RxsController < ApplicationController
     def cbo_update
         @rx = Rx.find(params[:rxId])
         presc = Prescriber.find(rx_params[:prescriberId])
-        @rx.update(
-            hc_id: new_rx_info[:hcId],
-            clienttel: new_rx_info[:tel],
-            language: new_rx_info[:language],
-            prescribername: "#{presc.firstname} #{presc.firstname}",
+        updated = @rx.update(
+            hc_id: rx_params[:hcId],
+            clienttel: rx_params[:tel],
+            language: rx_params[:language],
+            prescribername: "#{presc.firstname} #{presc.lastname}",
             prescriberphone: presc.tel,
             prescriberemail: presc.email,
-            notes: new_rx_info[:notes]
-            )
-        byebug
+            notes: rx_params[:notes]
+        )
+        if updated
+            render json: {rx: RxSerializer.new(@rx)}
+        else
+            render json: {message: 'Sorry! Could not update, please try again.'}
+        end
     end
 
     private
 
     def rx_params
-        params.require(:rx).permit(:hcId, :tel, :language, :prescriberId :notes)
+        params.require(:rx).permit(:hcId, :tel, :language, :prescriberId, :notes)
     end
     
 end

@@ -14,7 +14,7 @@ class Api::V1::SurveysController < ApplicationController
             if survey_updated 
                 render json: { rxId: @rx.id }
             else
-                render json: { message: 'Sorry! Could not create, please try again.'}
+                render json: { message: 'Sorry! Could not create, please try again.' }
             end
         end
     end
