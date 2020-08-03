@@ -2,6 +2,7 @@ class Rx < ApplicationRecord
   belongs_to :cbo
   belongs_to :hc
   has_many :surveys
+  validates :rxcode, uniqueness: true
 
   before_create :add_rxcode
 
