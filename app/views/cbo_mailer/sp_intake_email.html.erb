@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to the 4-CT Card Program!</h1>
+    <br/>
+    <h3>Your prescription code is: <%= @rx.rxcode %></h3>
+    <br/>
+    <p>To retrieve your 4-CT Card, follow these instructions:</p>
+    <ol>
+      <li>
+        <p>The selected health center is <%= @hc.name %>. They will reach out to you to schedule an appointment to pick up your card. </p>
+      </li>
+      <li>
+        <p> To pick up your 4-CT Card from <%= @hc.name %>, go to the address below. A picture and map to the health center is also located below.</p>
+      </li>
+      <li>
+        <p> Make sure to the prescription code so the health center can verify your prescription. It is located at the top of this email as well as immediately below.</p>
+        <h3>Your prescription code is: <%= @rx.rxcode %></h3>
+      </li>
+    </ol>
+    <p>Thanks for participating in the 4-CT program, we hope this helps!</p>
+  </body>
+</html>

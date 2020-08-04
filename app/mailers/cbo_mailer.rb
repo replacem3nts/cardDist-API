@@ -1,0 +1,2 @@
+class CboMailer < ApplicationMailer
+end
