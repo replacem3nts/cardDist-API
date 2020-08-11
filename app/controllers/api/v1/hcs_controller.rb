@@ -17,7 +17,7 @@ class Api::V1::HcsController < ApplicationController
     def persist_login
         wristband = encode_token({hc_id: @hc.id})
         render json: {
-            hc: HcSerializer.new(@hc),
+            hc: SingleHcSerializer.new(@hc),
             token: wristband
         }
     end

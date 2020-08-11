@@ -1,3 +1,3 @@
 class SingleHcSerializer < HcSerializer
-  has_many :rxs
+  has_many :rxes
 end
