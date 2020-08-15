@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_224150) do
+ActiveRecord::Schema.define(version: 2020_08_15_205655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cardloaders", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "cbos", force: :cascade do |t|
     t.string "username"
@@ -33,15 +40,6 @@ ActiveRecord::Schema.define(version: 2020_08_02_224150) do
     t.string "kind"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "documents", force: :cascade do |t|
-    t.integer "report_id", null: false
-    t.string "name"
-    t.string "filetype"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["report_id"], name: "index_documents_on_report_id"
   end
 
   create_table "funduses", force: :cascade do |t|
@@ -67,15 +65,6 @@ ActiveRecord::Schema.define(version: 2020_08_02_224150) do
     t.index ["survey_id"], name: "index_hhmembers_on_survey_id"
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.text "body"
-    t.text "footnote"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["document_id"], name: "index_pages_on_document_id"
-  end
-
   create_table "prescribers", force: :cascade do |t|
     t.bigint "cbo_id", null: false
     t.string "firstname"
@@ -87,12 +76,6 @@ ActiveRecord::Schema.define(version: 2020_08_02_224150) do
     t.index ["cbo_id"], name: "index_prescribers_on_cbo_id"
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "rxes", force: :cascade do |t|
     t.bigint "cbo_id", null: false
     t.bigint "hc_id", default: 1, null: false
@@ -102,13 +85,13 @@ ActiveRecord::Schema.define(version: 2020_08_02_224150) do
     t.string "prescribername"
     t.string "prescriberphone"
     t.datetime "appt"
-    t.string "cardserial"
+    t.string "cardserial", default: ""
     t.boolean "pickedup", default: false
     t.boolean "loaded", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "prescriberemail"
-    t.text "notes"
+    t.text "notes", default: "-"
     t.string "rxcode"
     t.index ["cbo_id"], name: "index_rxes_on_cbo_id"
     t.index ["hc_id"], name: "index_rxes_on_hc_id"
@@ -154,9 +137,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_224150) do
     t.index ["rx_id"], name: "index_surveys_on_rx_id"
   end
 
-  add_foreign_key "documents", "reports"
   add_foreign_key "hhmembers", "surveys"
-  add_foreign_key "pages", "documents"
   add_foreign_key "prescribers", "cbos"
   add_foreign_key "rxes", "cbos"
   add_foreign_key "rxes", "hcs"

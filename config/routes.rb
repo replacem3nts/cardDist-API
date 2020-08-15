@@ -13,8 +13,13 @@ Rails.application.routes.draw do
       post '/hcs/login', to: 'hcs#login'
       get '/hcs/persist_login', to: 'hcs#persist_login'
 
+      post '/cardloaders/login', to: 'cardloaders#login'
+      get '/cardloaders/persist_login', to: 'cardloaders#persist_login'
+
       post '/rxs', to: 'rxs#create'
       patch '/rxs/cbos', to: 'rxs#cbo_update'
+      patch '/rxs/hcs', to: 'rxs#hc_update'
+      patch '/rxs/cardloaders', to: 'rxs#cardloaders_update'
 
       post '/surveys', to: 'surveys#create'
     end
