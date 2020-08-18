@@ -107,3 +107,5 @@ Doctorvisit.create(kind: 'Community Health Center')
 Doctorvisit.create(kind: 'Walk-in Clinic')
 Doctorvisit.create(kind: "Doctor's Office")
 Doctorvisit.create(kind: 'None of the Above')
+
+Cardloader.create(username: 'adminloader', password: '4ctcard')

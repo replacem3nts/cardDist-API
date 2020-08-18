@@ -1,3 +1,3 @@
 class CardloaderSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :hcs
 end

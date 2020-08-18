@@ -27,6 +27,8 @@ class ApplicationController < ActionController::API
                 @cbo = Cbo.find_by(id: user_id)
             when 'hc_id'
                 @hc = Hc.find_by(id: user_id)
+            when 'cardloader_id'
+                @cardloader = Cardloader.find_by(id: user_id)
             else
                 nil
             end

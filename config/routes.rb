@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post '/hcs/login', to: 'hcs#login'
       get '/hcs/persist_login', to: 'hcs#persist_login'
 
+      get '/cardloaders', to: 'cardloaders#index'
       post '/cardloaders/login', to: 'cardloaders#login'
       get '/cardloaders/persist_login', to: 'cardloaders#persist_login'
 
