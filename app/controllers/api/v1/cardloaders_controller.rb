@@ -1,4 +1,6 @@
 class Api::V1::CardloadersController < ApplicationController
+    before_action :authorized, only: [:persist_login]
+    
     def index
         @cl = Cardloader.first
         render json: {cardloader: CardloaderSerializer.new(@cl)}
